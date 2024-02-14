@@ -12,12 +12,15 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       emit(state.copyWith(status: Status.loading));
       final result = await productsRepo.getAllProducts();
       result.either(
-          (left) => null,
+          (left) => emit(state.copyWith(
+                status: Status.error,
+              )),
           (right) =>
               emit(state.copyWith(products: right, status: Status.success)));
     });
 
     on<DeleteProductsEvent>(_deleteProducts);
+    on<UpdateProductsEvent>(_updateProduct);
   }
 
   final ProductsRepo productsRepo;
@@ -26,6 +29,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       DeleteProductsEvent event, Emitter<ProductsState> emit) async {
     emit(state.copyWith(status: Status.loading));
     await productsRepo.deleteProducts(id: event.id);
+    emit(state.copyWith(status: Status.success));
+  }
+
+  Future<void> _updateProduct(
+      UpdateProductsEvent event, Emitter<ProductsState> emit) async {
+    emit(state.copyWith(status: Status.loading));
+    await productsRepo.updateProducts(productRequest: event.productRequest);
     emit(state.copyWith(status: Status.success));
   }
 }

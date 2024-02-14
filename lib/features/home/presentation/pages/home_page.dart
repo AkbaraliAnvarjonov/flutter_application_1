@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/widget/modal_progres_hud.dart';
 import 'package:flutter_application_1/features/home/presentation/bloc/products_bloc/products_bloc.dart';
 import 'package:flutter_application_1/features/home/presentation/bloc/products_bloc/products_event.dart';
 import 'package:flutter_application_1/features/home/presentation/bloc/products_bloc/products_state.dart';
+import 'package:flutter_application_1/router/route_names.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +28,10 @@ class _HomePageState extends State<HomePage> {
               SliverList.builder(
                 itemCount: state.products.length,
                 itemBuilder: (_, index) => ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRouteNames.update,
+                        arguments: state.products[index]);
+                  },
                   title: Text(state.products[index].title),
                   trailing: IconButton(
                       onPressed: () {

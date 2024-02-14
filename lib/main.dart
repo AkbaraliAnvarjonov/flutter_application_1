@@ -3,10 +3,12 @@ import 'package:flutter_application_1/features/home/domain/products_repository.d
 import 'package:flutter_application_1/features/home/presentation/bloc/products_bloc/products_bloc.dart';
 import 'package:flutter_application_1/features/home/presentation/bloc/products_bloc/products_event.dart';
 import 'package:flutter_application_1/features/home/presentation/pages/home_page.dart';
+import 'package:flutter_application_1/get_it.dart';
 import 'package:flutter_application_1/router/app_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  await init();
   runApp(const MyApp());
 }
 

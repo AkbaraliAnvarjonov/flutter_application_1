@@ -8,6 +8,8 @@ import 'package:flutter_application_1/features/home/data/model/product_model.dar
 
 import '../../../core/error/failure.dart';
 import '../../../core/error/server_error.dart';
+import '../../../get_it.dart';
+import '../data/model/product_request.dart';
 
 part 'package:flutter_application_1/features/home/data/products_repository_impl.dart';
 
@@ -15,4 +17,7 @@ abstract class ProductsRepo {
   Future<Either<Failure, List<ProductModel>>> getAllProducts();
 
   Future<Either<Failure, bool>> deleteProducts({required int id});
+
+  Future<Either<Failure, bool>> updateProducts(
+      {required ProductRequest productRequest});
 }
